@@ -1,22 +1,25 @@
 import { useState } from 'react'
 import Input from '../input/input'
 import './registration.scss'
-import {registration} from '../../actions/user'
+import {login} from '../../actions/user'
+import {useDispatch} from 'react-redux'
 
-const Registration = () => {
+const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    const dispatch = useDispatch()
     return (
         <div className="registration">
             <div className="registration__form">
-                <div className="registration__header">Регистрация</div>
+                <div className="registration__header">Авторизация</div>
                 <Input value={email} onChange={setEmail} type="text" placeholder={"Введите email"} />
                 <Input value={password} onChange={setPassword} type="password" placeholder={"Введите пароль"} />
                 <button 
                     className="registration__btn"
-                    onClick={() => registration(email, password)}
+                    onClick={() => dispatch(login(email, password))}
                 >
-                    Зарегистрироваться
+                    Войти
                 </button>
             </div>
 
@@ -24,4 +27,4 @@ const Registration = () => {
     )
 }
 
-export default Registration
+export default Login

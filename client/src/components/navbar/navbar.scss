@@ -41,13 +41,14 @@
 
     &__link{
         margin-left: 27px;
+        cursor: pointer;
 
         &:first-child{
             margin-left: 0;
         }
 
 
-        a{
+        a, div{
             text-decoration: none;
             color: inherit;
         }

@@ -1,8 +1,15 @@
 import './navbar.scss'
 import logo from '../../assets/img/logo.svg'
 import { NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux';
+import {useDispatch} from 'react-redux'
+import { logout } from '../../redusers/userReducer';
+
 
 const Navbar = () => {
+  const isAuth = useSelector(state => state.user.isAuth)
+  const dispatch = useDispatch()
+
     return (
         <header className='header'>
             <div className="container">
@@ -17,12 +24,15 @@ const Navbar = () => {
                     </div>
                     <nav className="nav">
                         <ul className="nav__list">
-                            <li className="nav__link">
+                            {!isAuth && <li className="nav__link">
                                 <NavLink to={'/login'} >Войти</NavLink>
-                            </li>
-                            <li className="nav__link">
+                            </li>}
+                            {!isAuth && <li className="nav__link">
                                 <NavLink to={'/registration'}>Регистрация</NavLink>
-                            </li>
+                            </li>}
+                            {isAuth && <li className="nav__link">
+                                <div onClick={() => dispatch(logout())}>Выйти</div>
+                            </li>}
                         </ul>
                     </nav>
                 </div>

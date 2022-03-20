@@ -2,11 +2,13 @@ import express from 'express'
 import mongoose from 'mongoose'
 import config from 'config'
 import router from './routers/auth.router.js'
+import cors from 'cors'
 
 const PORT = config.get('serverPort')
 const app = express()
 
 app.use(express.json())
+app.use(cors())
 
 
 app.use('/api/auth', router)

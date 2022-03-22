@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import config from 'config'
 import router from './routers/auth.router.js'
+import fileRouter from './routers/file.router.js'
 import cors from 'cors'
 
 const PORT = config.get('serverPort')
@@ -12,6 +13,7 @@ app.use(cors())
 
 
 app.use('/api/auth', router)
+app.use('/api/file', fileRouter)
 
 const start = async () => {
     try {

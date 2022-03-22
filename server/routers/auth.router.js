@@ -5,8 +5,8 @@ import { check, validationResult } from "express-validator";
 import jwt from 'jsonwebtoken'
 import config from 'config'
 import authMidleware from '../midleware/auth.midleware.js'
-
-
+import fileService from "../servises/fileService.js";
+import File from "../models/File.js";
 
 const router = new Router()
 
@@ -32,6 +32,7 @@ router.post('/registration', [
             password: hashPassword
         })
         await user.save()
+        await fileService.createDir(new File({user: user.id, name: ''}))
         res.json({message: 'User was created'})
 
 

@@ -13,7 +13,6 @@ function App() {
   const isAuth = useSelector(state => state.user.isAuth)
   const dispatch = useDispatch()
 
-
   useEffect(() => {
     dispatch(auth())
   }, [])
@@ -26,11 +25,18 @@ function App() {
             <Routes>
               <Route path="/registration" element={<Registration />} />
               <Route path="/login" element={<Login />} />
+              <Route
+                path="*"
+                element={<Navigate to="/login" replace />}
+              />
             </Routes>
             :
             <Routes>
               <Route exact path="/" element={<Disk />} />
-              {/* <Navigate replace to="/" /> */}
+              <Route
+                path="*"
+                element={<Navigate to="/" replace />}
+              />
             </Routes>
           }
 

@@ -1,10 +1,13 @@
 const SET_FILES = 'SET_FILES'
 const SET_CURRENT_DIR = 'SET_CURRENT_DIR'
+const ADD_FILE = 'ADD_FILE'
+const SET_POPUP_DISPLAY = 'SET_POPUP_DISPLAY'
 
 
 const defaultState = {
     files: [],
-    currentDir: null // здесь будем хранить id папки в которой мы находимся в данный момент
+    currentDir: null, // здесь будем хранить id папки в которой мы находимся в данный момент
+    displayPopup: 'none'
 }
 
 export default function fileReducer(state = defaultState, action){
@@ -13,6 +16,10 @@ export default function fileReducer(state = defaultState, action){
             return {...state, files: action.payload}
         case SET_CURRENT_DIR: 
             return {...state, currentDir: action.payload}
+        case ADD_FILE: 
+            return {...state, files: [...state.files, action.payload]}
+        case SET_POPUP_DISPLAY: 
+            return {...state, displayPopup: action.payload}
         default:
             return state
 
@@ -23,3 +30,5 @@ export default function fileReducer(state = defaultState, action){
 
 export const setFiles = (files) => ({type: SET_FILES, payload: files}) 
 export const setCurrentDir = (dir) => ({type: SET_FILES, payload: dir}) 
+export const addFile = (file) => ({type: ADD_FILE, payload: file}) 
+export const setPOpupDisplay = (display) => ({type: SET_POPUP_DISPLAY, payload: display}) 

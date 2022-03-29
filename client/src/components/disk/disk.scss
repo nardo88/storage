@@ -5,7 +5,20 @@
         display: flex;
     }
 
-    &__create{
+    &__create, &__back{
         margin-left: 10px;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 22px;
+        line-height: 26px;
+        color: #FFFFFF;
+        background: #566885;
+        border-radius: 12px;
+        padding: 2px 25px;
+        cursor: pointer;
+        outline: none;
+        border: none;
     }
+
+    
 }

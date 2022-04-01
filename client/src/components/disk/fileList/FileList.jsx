@@ -15,7 +15,9 @@ const FileList = () => {
                 <div className="filelist__name size">размер</div>
             </div>
             {
+                files.length ? 
                 files.map(file => <File  key={file._id} {...file} />)
+                : <div>В данной директории нет файлов</div>   
             }
         </div>
     )

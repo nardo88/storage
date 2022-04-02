@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getFiles } from '../../actions/file'
-import { setCurrentDir, setPOpupDisplay } from '../../redusers/fileReducer'
+import { getFiles, uploadFile } from '../../actions/file'
+import {  setCurrentDir, setPOpupDisplay } from '../../redusers/fileReducer'
 import './disk.scss'
 import FileList from './fileList/FileList'
 import Popup from './Popup'
@@ -20,6 +20,12 @@ const Disk = () => {
         dispatch(setCurrentDir(backDirId)) 
     }
 
+    const fileUploadHandler = (e) => {
+        console.log(1)
+        const files = [...e.target.files]
+        files.forEach(file => dispatch(uploadFile(file, currentDir)))
+    }
+
     useEffect(() => {
         dispatch(getFiles(currentDir))
     }, [currentDir])
@@ -28,6 +34,10 @@ const Disk = () => {
             <div className="disk__btns">
                 <button className="disk__back" onClick={backClickHandler}>Назад</button>
                 <button className="disk__create" onClick={openPopup}>Создать папку</button>
+                <div className="disk__upload">
+                    <label htmlFor="disk__upload-input" className="disk__upload-label">Загрузить файл</label>
+                    <input multiple={true} onChange={fileUploadHandler} type="file" id="disk__upload-input" className="disk__upload-input" />
+                </div>
             </div>
             <FileList />
             <Popup />

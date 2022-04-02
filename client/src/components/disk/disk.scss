@@ -3,6 +3,7 @@
 
     &__btns{
         display: flex;
+        align-items: center;
     }
 
     &__create, &__back{
@@ -18,6 +19,20 @@
         cursor: pointer;
         outline: none;
         border: none;
+    }
+
+    &__upload{
+        margin-left: 10px;
+
+
+        &-label{
+            border: 2px dashed #566885;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        &-input{
+            display: none;
+        }
     }
 
     

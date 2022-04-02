@@ -16,7 +16,7 @@ const File = ({name, type, size, date, _id}) => {
     }
 
     return(
-        <div className="file" onClick={type === 'dir' && openDirHandler}>
+        <div className="file" onClick={type === 'dir' ? openDirHandler : () => null}>
             <img src={type === 'dir' ? folder : file} alt="" className="file__img" />
             <div className="file__name">{name}</div>
             <div className="file__date">{date.slice(0, 10)}</div>

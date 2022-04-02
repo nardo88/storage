@@ -9,14 +9,16 @@ const File = ({name, type, size, date, _id}) => {
     const dispatch = useDispatch()
     const currentDir = useSelector(state => state.files.currentDir )
 
-    const openDirHandler = () => {
-        dispatch(setCurrentDir(_id))
-        dispatch(pushToStack(currentDir))
+    const openDirHandler = (type) => {
+        if(type === 'dir'){
+            dispatch(setCurrentDir(_id))
+            dispatch(pushToStack(currentDir))
+        }
 
     }
 
     return(
-        <div className="file" onClick={type === 'dir' ? openDirHandler : () => null}>
+        <div className="file" onClick={() => openDirHandler(type)}>
             <img src={type === 'dir' ? folder : file} alt="" className="file__img" />
             <div className="file__name">{name}</div>
             <div className="file__date">{date.slice(0, 10)}</div>

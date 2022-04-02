@@ -39,7 +39,7 @@ export const createDir = (dirId, name) => {
 }
 
 
-export const uploadFile = (file, dirId) => {
+export function uploadFile(file, dirId) {
     return async dispatch => {
         try {
             const formData = new FormData()
@@ -48,12 +48,7 @@ export const uploadFile = (file, dirId) => {
                 formData.append('parent', dirId)
             }
             const response = await axios.post(`http://localhost:5000/api/file/upload`, formData, {
-
-            }, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
-                },
-                // эта функция позволяет на отслеживать прогресс загрузки
+                headers: {Authorization: `Bearer ${localStorage.getItem('token')}`},
                 onUploadProgress: progressEvent => {
                     const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length');
                     console.log('total', totalLength)
@@ -62,8 +57,8 @@ export const uploadFile = (file, dirId) => {
                         console.log(progress)
                     }
                 }
-            })
-            dispatch(addFile(response.data));
+            });
+            dispatch(addFile(response.data))
         } catch (e) {
             alert(e.response.data.message)
         }

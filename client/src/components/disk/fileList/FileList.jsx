@@ -2,11 +2,7 @@ import { useSelector } from 'react-redux'
 import './filelist.scss'
 import File from './file/File'
 const FileList = () => {
-
     const files = useSelector(state => state.files.files)
-  
-
-    console.log(files);
     return(
         <div className="filelist">
             <div className="filelist__header">

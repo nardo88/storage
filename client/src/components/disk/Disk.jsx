@@ -20,9 +20,8 @@ const Disk = () => {
         dispatch(setCurrentDir(backDirId)) 
     }
 
-    const fileUploadHandler = (e) => {
-        console.log(1)
-        const files = [...e.target.files]
+    function fileUploadHandler(event) {
+        const files = [...event.target.files]
         files.forEach(file => dispatch(uploadFile(file, currentDir)))
     }
 
@@ -36,7 +35,7 @@ const Disk = () => {
                 <button className="disk__create" onClick={openPopup}>Создать папку</button>
                 <div className="disk__upload">
                     <label htmlFor="disk__upload-input" className="disk__upload-label">Загрузить файл</label>
-                    <input multiple={true} onChange={fileUploadHandler} type="file" id="disk__upload-input" className="disk__upload-input" />
+                    <input multiple={true} onChange={(e) => fileUploadHandler(e)} type="file" id="disk__upload-input" className="disk__upload-input" />
                 </div>
             </div>
             <FileList />

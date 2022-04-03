@@ -87,12 +87,16 @@ class FileController {
 
             // получаем тип файла
             const type = file.name.split('.').pop()
+            let filePath = file.name
+            if(parent){
+                filePath = parent.path + "\\" + file.name
+            }
             // создаем документ для коллекции File для базы данных
             const dbFile = new File({
                 name: file.name,
                 type,
                 size: file.size,
-                path: parent?.path,
+                path: filePath,
                 parent: parent?._id,
                 user: user._id
             })
@@ -122,10 +126,28 @@ class FileController {
                 return res.download(path, file.name)
             }
             return res.status(400).json({message: 'download error'})
-        }catch(e){
+        }catch(error){
             console.log(error)
             res.status(500).json({
                 message: 'dowload Error',
+                error
+            })
+        }
+    }
+
+    async deleteFile(req, res){
+        try{
+            const file = await File.findOne({_id: req.query.id, user: req.user.id})
+            if(!file){
+                return req.status(400).json({message: 'file not found'})
+            }
+            fileService.deleteFile(file)
+            await file.remove()
+            return res.json({message: 'success'})
+        }catch(error){
+            console.log(error)
+            res.status(500).json({
+                message: 'Dir is not empty',
                 error
             })
         }

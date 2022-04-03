@@ -1,7 +1,8 @@
 import axios from 'axios'
 import {
     setFiles,
-    addFile
+    addFile,
+    deleteFileAction
 } from '../redusers/fileReducer'
 
 export const getFiles = (dirId) => {
@@ -88,5 +89,21 @@ export async function downloadFile(id, name){
         link.click()
         // удаляем ссылку
         link.remove()
+    }
+}
+
+export function deleteFile(id) {
+    return async dispatch => {
+        try {
+            const response = await axios.delete(`http://localhost:5000/api/file?id=${id}`,{
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            dispatch(deleteFileAction(id))
+            alert(response.data.message)
+        } catch (e) {
+            alert(e.response.data.message)
+        }
     }
 }

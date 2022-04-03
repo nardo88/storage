@@ -3,7 +3,7 @@ import folder from '../../../../assets/img/folder.svg'
 import file from '../../../../assets/img/file.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { pushToStack, setCurrentDir } from '../../../../redusers/fileReducer'
-import { downloadFile } from '../../../../actions/file'
+import { deleteFile, downloadFile } from '../../../../actions/file'
 import downloadIcon from '../../../../assets/img/download.svg'
 import deleteIcon from '../../../../assets/img/delete.svg'
 
@@ -25,6 +25,11 @@ const File = ({ name, type, size, date, _id }) => {
         downloadFile(_id, name)
     }
 
+    const deleteFileHandler = (e) => {
+        e.stopPropagation()
+        dispatch(deleteFile(_id))
+    }
+
     return (
         <div className="file" onClick={() => openDirHandler(type)}>
             <img src={type === 'dir' ? folder : file} alt="" className="file__img" />
@@ -35,7 +40,7 @@ const File = ({ name, type, size, date, _id }) => {
                 <button onClick={(e) => downLoadHandler(e)} className="file__btn file__download">
                     <img src={downloadIcon} alt="doenload" />
                 </button>}
-            <button className="file__btn file__delete">
+            <button onClick={(e) => deleteFileHandler(e)} className="file__btn file__delete">
                 <img src={deleteIcon} alt="delete" />
             </button>
         </div>

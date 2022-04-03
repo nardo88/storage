@@ -13,7 +13,7 @@ const FileList = () => {
             {
                 files.length ? 
                 files.map(file => <File  key={file._id} {...file} />)
-                : <div>В данной директории нет файлов</div>   
+                : <div className='filelist__empty'>В данной директории нет файлов</div>   
             }
         </div>
     )

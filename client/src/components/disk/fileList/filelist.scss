@@ -1,13 +1,17 @@
 .filelist {
     margin: 20px 0;
 
-    &__name {
-
-    }
+    &__name {}
 
     &__header {
         display: grid;
         grid-template-columns: 1fr 4fr repeat(4, 1fr);
+    }
+
+    &__empty {
+        padding: 30px;
+        text-align: center;
+        font-size: 25px;
     }
 }
 

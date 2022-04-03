@@ -7,25 +7,54 @@
 
     &__name {
         grid-column-start: 2;
-
     }
 
     &__img {
         justify-self: center;
-        
     }
 
     &__date {
         grid-column-start: 5;
         justify-self: center;
-
-
     }
 
     &__size {
         grid-column-start: 6;
         justify-self: center;
+    }
 
+    &__btn {
+        display: none;
+        border: 1px solid #566885;
+        box-sizing: border-box;
+        border-radius: 37px;
+        width: 58px;
+        height: 34px;
+        cursor: pointer;
+        padding: 5px;
+        justify-self: center;
+    }
 
+    &__download {
+    }
+
+    &__delete {}
+
+    &:hover &__date {
+        grid-column-start: 3;
+    }
+
+    &:hover &__size {
+        grid-column-start: 4;
+    }
+
+    &:hover &__download {
+        display: block;
+        grid-column-start: 5;
+    }
+
+    &:hover &__delete {
+        display: block;
+        grid-column-start: 6;
     }
 }

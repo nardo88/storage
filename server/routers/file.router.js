@@ -10,4 +10,6 @@ router.post('/upload', authMidleware, fileController.uploadFile)
 
 router.get('', authMidleware, fileController.getFiles)
 
+router.get('/download', authMidleware, fileController.downloadFile)
+
 export default router

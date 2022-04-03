@@ -64,3 +64,29 @@ export function uploadFile(file, dirId) {
         }
     }
 }
+
+
+export async function downloadFile(id, name){
+    const response = await fetch(`http://localhost:5000/api/file/download?id=${id}`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+    })
+    if(response.status === 200){
+        const blob = await response.blob()
+        // с сервера мы получили наш файл в бинарном виде
+        const downloadUrl = window.URL.createObjectURL(blob)
+        // нам надо преобразовать его в нормальный файл
+        // создаем невидимую ссылку
+        const link = document.createElement('a')
+        // прописываем ей все необходимы атрибуты
+        link.href = downloadUrl
+        link.download = name
+        // добавляем ее в документ
+        document.body.appendChild(link)
+        // dspsdftv клик по ней
+        link.click()
+        // удаляем ссылку
+        link.remove()
+    }
+}

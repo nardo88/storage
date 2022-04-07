@@ -6,10 +6,23 @@ import {
 } from '../redusers/fileReducer'
 import { addUploaderFile, changeUploaderFile, showUploader } from '../redusers/uploadReducer'
 
-export const getFiles = (dirId) => {
+export const getFiles = (dirId, sort) => {
     return async dispatch => {
         try {
-            const response = await axios.get(`http://localhost:5000/api/file${dirId ? '?parent='+dirId: ''}`, {
+            let url = 'http://localhost:5000/api/file'
+            if(dirId){
+                url = `http://localhost:5000/api/file?parent=${dirId}`
+            }
+            if(sort){
+                url = `http://localhost:5000/api/file?sort=${sort}`
+            }
+            if(sort && dirId){
+                url = `http://localhost:5000/api/file?sort=${sort}&parent=${dirId}`
+
+            }
+
+            
+            const response = await axios.get(url, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }

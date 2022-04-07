@@ -5,6 +5,8 @@
     display: grid;
     grid-template-columns: 1fr 4fr repeat(4, 1fr);
 
+    animation: file-enter 500ms forwards;
+
     &__name {
         grid-column-start: 2;
     }
@@ -56,5 +58,17 @@
     &:hover &__delete {
         display: block;
         grid-column-start: 6;
+    }
+}
+
+@keyframes file-enter{
+    0%{
+        opacity: 0;
+        transform: translateY(-50%)
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0)
+
     }
 }

@@ -14,4 +14,6 @@ router.get('/download', authMidleware, fileController.downloadFile)
 
 router.delete('/', authMidleware, fileController.deleteFile)
 
+router.get('/search', authMidleware, fileController.searchFile)
+
 export default router

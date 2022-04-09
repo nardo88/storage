@@ -11,6 +11,7 @@ const Disk = () => {
     const dispatch = useDispatch()
     const currentDir = useSelector(state => state.files.currentDir)
     const dirStack = useSelector(state => state.files.dirStack)
+    const loader = useSelector(state => state.app.loader)
     const [drugEnter, setDrugEnter] = useState(false)
     const [sort, setSort] = useState('type')
 
@@ -52,6 +53,15 @@ const Disk = () => {
     useEffect(() => {
         dispatch(getFiles(currentDir, sort))
     }, [currentDir, sort])
+
+    if(loader){
+        return (
+            <div className='loader'>
+                <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            </div>
+        )
+    }
+
     return (
          !drugEnter ? (
             <div className='disk' onDragEnter={dragEnterHAndler} onDragLeave={dragLeaveHandler} onDragOver={dragEnterHAndler}>

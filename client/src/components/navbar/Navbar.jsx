@@ -7,11 +7,15 @@ import { logout } from '../../redusers/userReducer';
 import { useState } from 'react';
 import { getFiles, searchFiles } from '../../actions/file';
 import { showLoader } from '../../redusers/appReducer';
+import defaultAvatar from '../../assets/img/avatar.svg'
+import { API_URL } from '../../config';
 
 
 const Navbar = () => {
     const isAuth = useSelector(state => state.user.isAuth)
     const currentDir = useSelector(state => state.files.currentDir)
+    const currentUser = useSelector(state => state.user.currentUser)
+    const avatar = currentUser.avatar ? `${API_URL + currentUser.avatar}` : defaultAvatar
 
     const dispatch = useDispatch()
     const [search, setSearch] = useState('')
@@ -19,15 +23,15 @@ const Navbar = () => {
 
     const searchHandler = (e) => {
         setSearch(e.target.value)
-        if(searchTimeOut){
+        if (searchTimeOut) {
             clearTimeout(searchTimeOut)
         }
         dispatch(showLoader())
-        if(e.target.value !== ''){
-        setSearchTimeOut(setTimeout((value) => {
-            dispatch(searchFiles(value))
-        }, 500, e.target.value) )
-        }else {
+        if (e.target.value !== '') {
+            setSearchTimeOut(setTimeout((value) => {
+                dispatch(searchFiles(value))
+            }, 500, e.target.value))
+        } else {
             dispatch(getFiles(currentDir))
         }
     }
@@ -53,6 +57,11 @@ const Navbar = () => {
                                 <NavLink to={'/registration'}>Регистрация</NavLink>
                             </li>}
                             {isAuth && <li className="nav__link">
+                                <NavLink to={'/profile'} >
+                                    <img className='nav__avatar' src={avatar} alt="" />
+                                </NavLink>
+                            </li>}
+                            {isAuth && <li className="nav__link">
                                 <div onClick={() => dispatch(logout())}>Выйти</div>
                             </li>}
                         </ul>
@@ -61,10 +70,10 @@ const Navbar = () => {
                 </div>
                 {isAuth &&
                     <div className="search">
-                        <input 
-                            type="text" 
-                            placeholder='Название файла...' 
-                            className='search__input' 
+                        <input
+                            type="text"
+                            placeholder='Название файла...'
+                            className='search__input'
                             value={search}
                             onChange={searchHandler}
                         />

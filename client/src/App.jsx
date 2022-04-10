@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { auth } from './actions/user';
 import Disk from './components/disk/Disk';
+import Profile from './components/profile/Profile';
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
             :
             <Routes>
               <Route exact path="/" element={<Disk />} />
+              <Route exact path="/profile" element={<Profile />} />
               <Route
                 path="*"
                 element={<Navigate to="/" replace />}

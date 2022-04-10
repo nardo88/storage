@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getFiles, uploadFile } from '../../actions/file'
-import { setCurrentDir, setPOpupDisplay } from '../../redusers/fileReducer'
+import { setCurrentDir, setFileView, setPOpupDisplay } from '../../redusers/fileReducer'
 import './disk.scss'
 import FileList from './fileList/FileList'
 import Popup from './Popup'
@@ -77,6 +77,8 @@ const Disk = () => {
                         <option value="type">По типу</option>
                         <option value="date">По дате</option>
                     </select>
+                    <button className="disk__plate" onClick={() => dispatch(setFileView('plate'))}/>
+                    <button className="disk__list" onClick={() => dispatch(setFileView('list'))}/>
                 </div>
                 <FileList />
                 <Popup />

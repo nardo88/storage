@@ -132,7 +132,7 @@ class FileController {
         try{
             // находим файл в базе который надо скачать
             const file = await File.findOne({_id: req.query.id, user: req.user.id})
-            const path = config.get('filePath') + '\\' + req.user.id + '\\' + file.path
+            const path = fileService.getPath(file)
             console.log(path)
             if(fs.existsSync(path)){
                 return res.download(path, file.name)

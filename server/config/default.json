@@ -2,5 +2,6 @@
     "serverPort": 5000,
     "dbUrl": "mongodb+srv://admin:admin@cluster0.rwelf.mongodb.net/storage?retryWrites=true&w=majority",
     "secretKey":"mern-secret-key",
-    "filePath": "C:\\Users\\Ольга\\Desktop\\storage\\server\\files"
+    "filePath": "C:\\Users\\Ольга\\Desktop\\storage\\server\\files",
+    "staticPath": "C:\\Users\\Ольга\\Desktop\\storage\\server\\static"
 }

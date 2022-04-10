@@ -3,6 +3,7 @@ import File from '../models/File.js'
 import User from '../models/User.js'
 import config from 'config'
 import fs from 'fs'
+import Uuid from 'uuid'
 
 class FileController {
     async createDir(req, res) {
@@ -178,6 +179,40 @@ class FileController {
             console.log(error)
             res.status(500).json({
                 message: 'Search error',
+                error
+            })
+        }
+    }
+
+    async uploadAvatar(req, res) {
+        try{
+            const file = req.files.file
+            const user = await User.findById(req.user.id)
+            const avatarName = Uuid.v4() + '.jpg'
+            file.mv(config.get('staticPath') + '\\' + avatarName)
+            user.avatar = avatarName
+            await user.save()
+            res.json(user)
+        }catch(error){
+            console.log(error)
+            res.status(500).json({
+                message: 'Upload avatar error',
+                error
+            })
+        }
+    }
+
+    async deleteAvatar(req, res) {
+        try{
+            const user = await User.findById(req.user.id)
+            fs.unlinkSync(config.get('staticPath') + '\\' + user.avatar)
+            user.avatar = null
+            await user.save()
+            res.json(user)
+        }catch(error){
+            console.log(error)
+            res.status(500).json({
+                message: 'Delete avatar error',
                 error
             })
         }

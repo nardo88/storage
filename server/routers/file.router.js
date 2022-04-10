@@ -5,15 +5,16 @@ const router = new Router()
 
 
 router.post('', authMidleware, fileController.createDir)
-
+router.post('/avatar', authMidleware, fileController.uploadAvatar)
 router.post('/upload', authMidleware, fileController.uploadFile)
 
 router.get('', authMidleware, fileController.getFiles)
-
 router.get('/download', authMidleware, fileController.downloadFile)
+router.get('/search', authMidleware, fileController.searchFile)
 
 router.delete('/', authMidleware, fileController.deleteFile)
+router.delete('/avatar', authMidleware, fileController.deleteAvatar)
 
-router.get('/search', authMidleware, fileController.searchFile)
+
 
 export default router

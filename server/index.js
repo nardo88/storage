@@ -13,6 +13,9 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
+// указываем express путь до статики
+app.use(express.static('static'))
+
 // использование fileUpload для работы с файлами
 app.use(fileUpload({
     
